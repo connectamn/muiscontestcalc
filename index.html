@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentals of Islam Contest Marks Calculator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+    <!-- two logos: left and right -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; width:100%;">
+        <img src="muis live logo 4.png" alt="Left logo" style="max-width:70px; height:auto;" />
+        <img src="foipng.png" alt="Right logo" style="max-width:500px; height:auto;" />
+    </div>
+    <h1>Fundamentals of Islam Contest Marks Calculator</h1>
+    <p>Total Marks: <strong>60</strong> | Negative Marking: <strong>0.25</strong> per incorrect answer</p>
+
+    <table>
+        <tr>
+            <th>Total</th>
+            <th>Correct</th>
+            <th>Incorrect</th>
+            <th>Obtained</th>
+        </tr>
+
+        <tr>
+            <td>60</td>
+            <td><input type="number" id="correct" min="0" max="60" placeholder="Correct"></td>
+            <td><input type="number" id="incorrect" min="0" max="60" placeholder="Incorrect"></td>
+            <td class="result" id="result">0.00</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+function calculateMarks() {
+    let correct = parseFloat(document.getElementById("correct").value) || 0;
+    let incorrect = parseFloat(document.getElementById("incorrect").value) || 0;
+
+    let obtained = correct - (incorrect * 0.25);
+
+    if (obtained < 0) obtained = 0;
+
+    document.getElementById("result").innerText = obtained.toFixed(2);
+}
+
+document.getElementById("correct").addEventListener("input", calculateMarks);
+document.getElementById("incorrect").addEventListener("input", calculateMarks);
+</script>
+
+</body>
+</html>
