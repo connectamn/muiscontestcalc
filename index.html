@@ -37,8 +37,26 @@
 
 <script>
 function calculateMarks() {
-    let correct = parseFloat(document.getElementById("correct").value) || 0;
-    let incorrect = parseFloat(document.getElementById("incorrect").value) || 0;
+    const total = 60;
+    const correctInput = document.getElementById("correct");
+    const incorrectInput = document.getElementById("incorrect");
+
+    let correct = parseFloat(correctInput.value) || 0;
+    let incorrect = parseFloat(incorrectInput.value) || 0;
+
+    if (correct < 0) correct = 0;
+    if (incorrect < 0) incorrect = 0;
+
+    if (correct > total) {
+        correct = total;
+        correctInput.value = correct;
+    }
+
+    // Prevent overflow: correct + incorrect should not exceed total
+    if (correct + incorrect > total) {
+        incorrect = Math.max(0, total - correct);
+        incorrectInput.value = incorrect;
+    }
 
     let obtained = correct - (incorrect * 0.25);
 
